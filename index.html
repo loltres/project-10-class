@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разработка веб-сайтов на платформе Visual Studio Code</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f5f7fa;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .hero {
+            position: relative;
+            background: #0f2b3d;
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 3px solid #3498db;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 45%;
+            opacity: 0.35;
+            z-index: 0;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        .school-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 3px solid #3498db;
+            display: inline-block;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.2rem;
+            border: 1px solid #ddd;
+        }
+        .tech-badge {
+            background: #eef2ff;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #1e4a6e;
+        }
+        .list-styled {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.3rem;
+            position: relative;
+        }
+        .list-styled li::before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .learning-detail {
+            background: white;
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-top: 1rem;
+            border: 1px solid #ddd;
+        }
+        .learning-detail h3 {
+            color: #1e4a6e;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        .plus-minus {
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid #3498db;
+        }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .screenshot-card {
+            background: white;
+            border-radius: 12px;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .screenshot-card img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+        .screenshot-card .caption {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1e4a6e;
+            margin-top: 0.5rem;
+        }
+        .site-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+        .site-link:hover {
+            background: #2980b9;
+        }
+        .hotkeys-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .hotkeys-table th {
+            background: #1e4a6e;
+            color: white;
+            padding: 8px;
+            text-align: left;
+        }
+        .hotkeys-table td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        .footer {
+            background: #0f2b3d;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            border-top: 3px solid #3498db;
+            position: relative;
+            overflow: hidden;
+        }
+        .footer-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        .footer .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.5rem; }
+            .section-title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <img class="hero-bg" src="school32.jpg" alt="МОУ СОШ №32 им. А.С. Пушкина">
+    <div class="container">
+        <div class="school-badge">🏫 МОУ СОШ №32 им. А.С. Пушкина | Энгельсский район</div>
+        <h1>Разработка веб-сайтов на платформе Visual Studio Code</h1>
+        <p style="font-size: 1.1rem;">Индивидуальный итоговый проект ученика 10Б класса Моисеева Виталия Дмитриевича</p>
+        <div class="hero-meta">
+            <span>🏆 Руководитель: Синютина Галина Геннадьевна</span>
+            <span>📅 2026 г. | г. Энгельс</span>
+            <span>🔍 Тип проекта: исследовательский</span>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <section style="padding: 2rem 0; border-bottom: 1px solid #ddd;">
+            <h2 class="section-title">Введение & актуальность</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="tech-badge">🎯 Идея</div>
+                    <p>Спроектировать и разработать интерактивный веб-сайт в профессиональной среде Visual Studio Code, изучив процесс создания адаптивного и функционального ресурса.</p>
+                </div>
+                <div class="card">
+                    <div class="tech-badge">⚡ Актуальность</div>
+                    <p>В современном мире информационных технологий наличие профессиональных навыков разработки веб-сайтов становится необходимым для бизнеса и индивидуальных специалистов. Платформа Visual Studio Code — один из самых популярных и мощных инструментов среди веб-разработчиков. Освоение и внедрение методов работы с этой средой повышает производительность, облегчает выполнение сложных задач и способствует профессиональному росту разработчиков.</p>
+                </div>
+                <div class="card">
+                    <div class="tech-badge">📚 Изученность & проблема</div>
+                    <p>Вопросы разработки веб-сайтов на платформе Visual Studio Code широко изучены в учебной и профессиональной литературе. Однако многие пользователи сталкиваются с трудностями при создании комплексных и адаптивных веб-проектов.</p>
+                </div>
+            </div>
+            <div style="background: white; border-radius: 12px; padding: 1.2rem; border: 1px solid #ddd;">
+                <h3 style="color: #1e4a6e;">🎯 Цель проекта</h3>
+                <p>Изучить разработку веб-сайтов на платформе Visual Studio Code.</p>
+                <h3 style="color: #1e4a6e; margin-top: 1rem;">📌 Задачи</h3>
+                <ul class="list-styled">
+                    <li>Узнать, для чего нужны веб-сайты в различных сферах.</li>
+                    <li>Узнать, как обучиться разработке веб-сайтов.</li>
+                    <li>Узнать, как пользоваться платформой Visual Studio Code.</li>
+                    <li>Узнать, как создать веб-сайт на платформе Visual Studio Code.</li>
+                </ul>
+            </div>
+        </section>
+        <section style="padding: 2rem 0; border-bottom: 1px solid #ddd;">
+            <h2 class="section-title">🌐 Для чего нужны веб-сайты?</h2>
+            <p>В современном мире сложно представить успешную деятельность без присутствия в интернете. Веб-сайты перестали быть просто «визитными карточками» и превратились в мощные инструменты, решающие конкретные задачи в разных областях. Рассмотрим основные сферы применения веб-сайтов на конкретных примерах.</p>
+            <div class="card-grid">
+                <div class="card"><strong>🛍 Бизнес и коммерция</strong><br>Интернет-магазины (Amazon, Wildberries, Ozon), корпоративные порталы (Siemens, Shell). Сайт — центр привлечения клиентов.</div>
+                <div class="card"><strong>🎬 Развлечения и медиа</strong><br>Стриминговые сервисы (Netflix, Rutube, PREMIER): миллионы пользователей одновременно.</div>
+                <div class="card"><strong>💻 Информационные технологии и IT</strong><br>Поисковые системы и экосистемы (Яндекс, Google): почта, карты, облака, музыка.</div>
+                <div class="card"><strong>🏦 Финансы и банкинг</strong><br>Интернет-банкинг (Сбербанк, Госуслуги) — высокая доступность для миллионов граждан.</div>
+                <div class="card"><strong>📚 Образование</strong><br>Образовательные платформы (Синергия, Учи.ру, Фоксфорд, Skyeng) — многомиллиардные компании.</div>
+            </div>
+        </section>
+        <section style="padding: 2rem 0; border-bottom: 1px solid #ddd;">
+            <h2 class="section-title">📖 Где учиться разработке веб-сайтов</h2>
+            <p>Освоение веб-разработки доступно каждому школьнику — существует множество способов получить знания: от самостоятельного изучения по книгам до обучения в колледже с получением диплома. Рассмотрим основные варианты, актуальные в 2026 году.</p>
+            
+            <div class="learning-detail">
+                <h3>📚 Книги для самостоятельного изучения</h3>
+                <p>Книги остаются надежным источником системных знаний. Для начинающего веб-разработчика существуют специальные издания, ориентированные на школьников и студентов. Они включают теорию, практические задания и дополнительные электронные материалы. Для занятий нужен только компьютер и доступ в интернет для скачивания примеров кода.</p>
+            </div>
+
+            <div class="learning-detail">
+                <h3>▶️ Видеохостинги (YouTube)</h3>
+                <p>Основной массив бесплатного контента. Здесь можно найти как отдельные уроки по конкретным технологиям, так и полные многочасовые курсы, структурированные как университетские программы.</p>
+                <div class="plus-minus">
+                    <p><strong>Плюсы:</strong> огромный выбор, наглядность, возможность учиться у практикующих разработчиков.</p>
+                    <p><strong>Минусы:</strong> отсутствие контроля знаний, риск «прыгать» между темами без системы.</p>
+                </div>
+            </div>
+
+            <div class="learning-detail">
+                <h3>💻 Интерактивные образовательные платформы</h3>
+                <p>Специализированные сайты, где обучение построено на написании кода прямо в браузере. Часто предлагают программы с последовательным прохождением тем, проверочными заданиями и итоговыми проектами для портфолио. Многие такие ресурсы выдают сертификаты о прохождении бесплатно.</p>
+                <div class="plus-minus">
+                    <p><strong>Плюсы:</strong> структурированность, немедленная проверка кода.</p>
+                    <p><strong>Минусы:</strong> для продвинутых тем часто требуется платная подписка (хотя базу можно освоить бесплатно).</p>
+                </div>
+            </div>
+        </section>
+        <section style="padding: 2rem 0; border-bottom: 1px solid #ddd;">
+            <h2 class="section-title">⚙️ Как пользоваться платформой Visual Studio Code</h2>
+            <p>Visual Studio Code (VS Code) — это современный редактор кода, разработанный корпорацией Microsoft. Он популярен среди разработчиков благодаря своей гибкости, широкому набору функций и удобству использования. Рассмотрим основные этапы работы с этой платформой.</p>
+            
+            <div class="learning-detail">
+                <h3>1. Установка Visual Studio Code</h3>
+                <p>Первый шаг к началу работы — установка редактора. Для этого необходимо:</p>
+                <ol class="list-styled" style="margin-left: 1.2rem;">
+                    <li>Перейти на официальный сайт Visual Studio Code: <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a></li>
+                    <li>Выбрать версию для своей операционной системы (Windows, macOS или Linux) и скачать установочный файл</li>
+                    <li>Запустить скачанный файл и следовать инструкциям мастера установки</li>
+                </ol>
+                <p>После завершения установки можно запустить программу и приступить к настройке.</p>
+            </div>
+
+            <div class="learning-detail">
+                <h3>2. Настройка интерфейса и русификация</h3>
+                <p>По умолчанию интерфейс VS Code отображается на английском языке. Чтобы сменить язык на русский, необходимо:</p>
+                <ol class="list-styled" style="margin-left: 1.2rem;">
+                    <li>Открыть палитру команд сочетанием клавиш <strong>Ctrl + Shift + P</strong> (для Windows)</li>
+                    <li>Ввести команду <strong>Configure Display Language</strong> и выбрать её</li>
+                    <li>В появившемся списке выбрать «Русский» (предварительно нужно установить языковой пакет из магазина расширений)</li>
+                    <li>Перезапустить редактор для применения изменений</li>
+                </ol>
+                <p>Для изменения других параметров интерфейса можно открыть настройки через меню «Файл» → «Параметры» → «Настройки» или нажав <strong>Ctrl + ,</strong>.</p>
+            </div>
+
+            <div class="learning-detail">
+                <h3>3. Обзор пользовательского интерфейса</h3>
+                <p>Интерфейс Visual Studio Code состоит из нескольких основных элементов: панель активности, боковая панель, редактор, миникарта, панель терминала, строка состояния.</p>
+                <div class="gallery">
+                    <div class="screenshot-card"><img src="1.png" alt="Панель активности" onerror="this.style.display='none'"><div class="caption">Панель активности</div></div>
+                    <div class="screenshot-card"><img src="2.png" alt="Боковая панель" onerror="this.style.display='none'"><div class="caption">Боковая панель</div></div>
+                    <div class="screenshot-card"><img src="3.png" alt="Редактор" onerror="this.style.display='none'"><div class="caption">Редактор</div></div>
+                    <div class="screenshot-card"><img src="4.png" alt="Мини-карта" onerror="this.style.display='none'"><div class="caption">Мини-карта</div></div>
+                    <div class="screenshot-card"><img src="5.png" alt="Панель терминала" onerror="this.style.display='none'"><div class="caption">Панель терминала</div></div>
+                    <div class="screenshot-card"><img src="6.png" alt="Строка состояния" onerror="this.style.display='none'"><div class="caption">Строка состояния</div></div>
+                </div>
+            </div>
+
+            <div class="learning-detail">
+                <h3>4. Установка расширений</h3>
+                <p>Главная сила VS Code заключается в его расширяемости. Расширения добавляют поддержку новых языков программирования, инструменты для форматирования, отладки и многое другое. Для установки расширений:</p>
+                <ol class="list-styled" style="margin-left: 1.2rem;">
+                    <li>Нажать на значок «Расширения» на панели активности или использовать сочетание <strong>Ctrl + Shift + X</strong></li>
+                    <li>Ввести название нужного расширения в поисковую строку</li>
+                    <li>Нажать кнопку «Install» для установки</li>
+                </ol>
+                <p><strong>Рекомендуемые расширения для веб-разработки:</strong> Live Server, Prettier, HTML CSS Support, JavaScript (ES6) code snippets.</p>
+            </div>
+
+            <div class="learning-detail">
+                <h3>5. Горячие клавиши</h3>
+                <p>Использование сочетаний клавиш значительно ускоряет работу в VS Code. Вот основные из них:</p>
+                <table class="hotkeys-table">
+                    <thead><tr><th>Действие</th><th>Сочетание (Windows)</th><th>Сочетание (macOS)</th></tr></thead>
+                    <tbody>
+                        <tr><td>Открыть палитру команд</td><td>Ctrl + Shift + P</td><td>Cmd + Shift + P</td></tr>
+                        <tr><td>Открыть файл</td><td>Ctrl + O</td><td>Cmd + O</td></tr>
+                        <tr><td>Создать новый файл</td><td>Ctrl + N</td><td>Cmd + N</td></tr>
+                        <tr><td>Сохранить файл</td><td>Ctrl + S</td><td>Cmd + S</td></tr>
+                        <tr><td>Поиск по файлам</td><td>Ctrl + P</td><td>Cmd + P</td></tr>
+                        <tr><td>Открыть терминал</td><td>Ctrl + `</td><td>Cmd + `</td></tr>
+                        <tr><td>Комментировать строку</td><td>Ctrl + /</td><td>Cmd + /</td></tr>
+                        <tr><td>Форматировать документ</td><td>Shift + Alt + F</td><td>Shift + Option + F</td></tr>
+                        <tr><td>Открыть настройки</td><td>Ctrl + ,</td><td>Cmd + ,</td></tr>
+                    </tbody>
+                </table>
+                <p>Просмотреть все доступные сочетания клавиш можно, открыв палитру команд и выбрав «Preferences: Open Keyboard Shortcuts».</p>
+            </div>
+        </section>
+        <section style="padding: 2rem 0; border-bottom: 1px solid #ddd;">
+            <h2 class="section-title">💻 Создание веб-сайта на платформе Visual Studio Code</h2>
+            <p>Visual Studio Code (VS Code) предоставляет все необходимые инструменты для создания веб-сайтов — от написания кода до предварительного просмотра в браузере. Рассмотрим, для чего нужны основные веб-технологии, и пошагово создадим простой, но полноценный веб-сайт, включающий HTML, CSS и JavaScript. Данный подход является основой для более сложных веб-проектов.</p>
+            
+            <div class="learning-detail">
+                <h3>1. Для чего нужны HTML, CSS и JavaScript</h3>
+                <p><strong>HTML (HyperText Markup Language)</strong> — это язык разметки, который создает каркас веб-страницы. Его можно сравнить со скелетом человека: он определяет, где будут находиться заголовки, абзацы, изображения, кнопки и другие элементы.</p>
+                <p><strong>CSS (Cascading Style Sheets)</strong> — это язык стилей, который отвечает за визуальное оформление веб-страницы. Если HTML — это скелет, то CSS — это кожа, одежда и макияж, которые делают сайт красивым и привлекательным.</p>
+                <p><strong>JavaScript (JS)</strong> — это язык программирования, который делает веб-страницу живой и интерактивной. Если HTML и CSS отвечают за то, что мы видим и как это выглядит, то JavaScript отвечает за то, что происходит, когда пользователь взаимодействует со страницей.</p>
+            </div>
+
+            <div class="learning-detail">
+                <h3>2. Создание структуры проекта</h3>
+                <p>Первый шаг в разработке любого веб-сайта — создание правильной структуры папок и файлов.</p>
+                <ol class="list-styled" style="margin-left: 1.2rem;">
+                    <li>Запустите Visual Studio Code</li>
+                    <li>На странице приветствия выберите «Открыть папку» или в меню выберите «Файл» → «Открыть папку»</li>
+                    <li>Перейдите в место, где вы хотите создать проект, и нажмите «Создать папку»</li>
+                    <li>Назовите папку, например, <strong>myfirstwebsite</strong></li>
+                    <li>Нажмите «Выбрать папку»</li>
+                </ol>
+                <p>Для создания полноценного веб-сайта нам потребуются три основных файла: <strong>index.html</strong> (структура), <strong>style.css</strong> (оформление), <strong>script.js</strong> (интерактивность).</p>
+                <div class="code-block">
+                    myfirstwebsite/<br>
+                    ├── index.html   (структура и содержимое страницы)<br>
+                    ├── style.css    (оформление и стили)<br>
+                    └── script.js    (интерактивность и логика)
+                </div>
+            </div>
+
+            <div class="learning-detail">
+                <h3>3. Написание HTML-кода (структура страницы)</h3>
+                <p>Откроем файл index.html и введём следующий код:</p>
+                <div class="code-block">
+                    &lt;!DOCTYPE html&gt;<br>
+                    &lt;html lang="ru"&gt;<br>
+                    &lt;head&gt;<br>
+                    &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+                    &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>
+                    &nbsp;&nbsp;&lt;title&gt;Мой первый сайт&lt;/title&gt;<br>
+                    &nbsp;&nbsp;&lt;link rel="stylesheet" href="style.css"&gt;<br>
+                    &lt;/head&gt;<br>
+                    &lt;body&gt;<br>
+                    &nbsp;&nbsp;&lt;header&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Добро пожаловать на мой сайт!&lt;/h1&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;nav&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="#"&gt;Главная&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#"&gt;О нас&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="#"&gt;Контакты&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;<br>
+                    &nbsp;&nbsp;&lt;/header&gt;<br>
+                    &nbsp;&nbsp;&lt;main&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;&lt;h2&gt;О нас&lt;/h2&gt;&lt;p&gt;Это пример веб-сайта, созданного в Visual Studio Code.&lt;/p&gt;&lt;/section&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;&lt;h2&gt;Наши преимущества&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Современные технологии&lt;/li&gt;&lt;li&gt;Профессиональный подход&lt;/li&gt;&lt;li&gt;Индивидуальные решения&lt;/li&gt;&lt;/ul&gt;&lt;/section&gt;<br>
+                    &nbsp;&nbsp;&lt;/main&gt;<br>
+                    &nbsp;&nbsp;&lt;footer&gt;&lt;p&gt;&amp;copy; 2026 Мой первый сайт&lt;/p&gt;&lt;/footer&gt;<br>
+                    &nbsp;&nbsp;&lt;script src="script.js"&gt;&lt;/script&gt;<br>
+                    &lt;/body&gt;<br>
+                    &lt;/html&gt;
+                </div>
+            </div>
+
+            <div class="learning-detail">
+                <h3>4. Написание CSS-кода (оформление)</h3>
+                <p>Откройте файл style.css и добавьте стили. CSS делает шапку сайта темно-синей, текст в ней белым, добавляет отступы и центрирует содержимое.</p>
+                <div class="code-block">
+                    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }<br>
+                    header { background: #2c3e50; color: white; padding: 1rem; text-align: center; }<br>
+                    nav ul li { display: inline; margin: 0 1rem; }<br>
+                    nav ul li a { color: white; text-decoration: none; font-weight: bold; }<br>
+                    nav ul li a:hover { color: #3498db; }<br>
+                    section { background: white; padding: 1.5rem; margin-bottom: 2rem; border-radius: 5px; }<br>
+                    footer { background: #2c3e50; color: white; text-align: center; padding: 1rem; }
+                </div>
+            </div>
+
+            <div class="learning-detail">
+                <h3>5. Написание JavaScript-кода (интерактивность)</h3>
+                <p>Откройте файл script.js и добавьте следующий код. Этот код находит кнопку на странице и «слушает» событие клика — когда пользователь нажимает на кнопку, JavaScript выполняет команду, показывая всплывающее окно. Также JavaScript получает текущую дату с компьютера пользователя и динамически вставляет её в подвал страницы:</p>
+                <div class="code-block">
+                    document.addEventListener('DOMContentLoaded', function() {<br>
+                    &nbsp;&nbsp;const header = document.querySelector('header');<br>
+                    &nbsp;&nbsp;const clickButton = document.createElement('button');<br>
+                    &nbsp;&nbsp;clickButton.textContent = 'Нажми меня!';<br>
+                    &nbsp;&nbsp;clickButton.style.margin = '10px';<br>
+                    &nbsp;&nbsp;clickButton.style.padding = '10px 20px';<br>
+                    &nbsp;&nbsp;clickButton.style.backgroundColor = '#3498db';<br>
+                    &nbsp;&nbsp;clickButton.style.color = 'white';<br>
+                    &nbsp;&nbsp;clickButton.style.border = 'none';<br>
+                    &nbsp;&nbsp;clickButton.style.borderRadius = '5px';<br>
+                    &nbsp;&nbsp;clickButton.style.cursor = 'pointer';<br>
+                    &nbsp;&nbsp;header.appendChild(clickButton);<br>
+                    &nbsp;&nbsp;clickButton.addEventListener('click', function() { alert('Привет! Это интерактивное сообщение.'); });<br>
+                    &nbsp;&nbsp;const footer = document.querySelector('footer');<br>
+                    &nbsp;&nbsp;const dateSpan = document.createElement('span');<br>
+                    &nbsp;&nbsp;dateSpan.style.display = 'block';<br>
+                    &nbsp;&nbsp;dateSpan.style.marginTop = '10px';<br>
+                    &nbsp;&nbsp;const currentDate = new Date();<br>
+                    &nbsp;&nbsp;dateSpan.textContent = `Сайт создан: ${currentDate.toLocaleDateString('ru-RU')}`;<br>
+                    &nbsp;&nbsp;footer.appendChild(dateSpan);<br>
+                    &nbsp;&nbsp;const navLinks = document.querySelectorAll('nav ul li a');<br>
+                    &nbsp;&nbsp;navLinks.forEach(link => {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;link.addEventListener('mouseenter', function() { this.style.transform = 'scale(1.1)'; this.style.transition = 'transform 0.3s'; });<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;link.addEventListener('mouseleave', function() { this.style.transform = 'scale(1)'; });<br>
+                    &nbsp;&nbsp;});<br>
+                    &nbsp;&nbsp;console.log('Сайт успешно загружен!');<br>
+                    });
+                </div>
+                <p><strong>Что делает этот код:</strong> добавляет кнопку с всплывающим сообщением, автоматически вставляет текущую дату в подвал, создает анимацию при наведении на пункты меню.</p>
+            </div>
+
+            <div class="learning-detail">
+                <h3>6. Пример готового веб-сайта</h3>
+                <p>После выполнения всех шагов вы получите полноценную веб-страницу, которая имеет современный дизайн с синей цветовой гаммой, содержит навигационное меню, информацию о компании и преимуществах, реагирует на наведение курсора, показывает всплывающее сообщение при нажатии на кнопку и автоматически отображает текущую дату создания.</p>
+                <p>HTML, CSS и JavaScript — это три кита, на которых держится вся современная веб-разработка. Благодаря таким функциям VS Code, как автодополнение кода, встроенный терминал, поддержка Git и обширная библиотека расширений, разработка веб-сайтов становится удобной и эффективной. Освоив этот базовый процесс, вы сможете переходить к более сложным проектам — адаптивным сайтам, веб-приложениям и использованию современных фреймворков.</p>
+                <p style="text-align: center; margin: 1rem 0;">
+                    <a href="firstwebsite/index.html" class="site-link">🌐 Открыть готовый сайт (папка firstwebsite)</a>
+                </p>
+            </div>
+
+            <div class="gallery">
+                <div class="screenshot-card"><img src="p1.png" alt="Навигационное меню" onerror="this.style.display='none'"><div class="caption">Навигационное меню, информация о компании и преимуществах</div></div>
+                <div class="screenshot-card"><img src="p2.png" alt="Реакция при наведении" onerror="this.style.display='none'"><div class="caption">Реакция кнопки навигационного меню при наведении курсора</div></div>
+                <div class="screenshot-card"><img src="p3.png" alt="Всплывающее сообщение" onerror="this.style.display='none'"><div class="caption">Всплывающее сообщение</div></div>
+                <div class="screenshot-card"><img src="p4.png" alt="Автоматическая дата" onerror="this.style.display='none'"><div class="caption">Автоматический показ текущей даты</div></div>
+            </div>
+        </section>
+        <section style="padding: 2rem 0; border-bottom: 1px solid #ddd;">
+            <h2 class="section-title">📌 Заключение</h2>
+            <div style="background: white; border-radius: 12px; padding: 1.2rem; border: 1px solid #ddd;">
+                <p>Было проведено исследование, направленное на изучение возможностей современной среды разработки и создание практического веб-ресурса.</p>
+                <p>В процессе работы над проектом были выполнены все поставленные задачи:</p>
+                <ul class="list-styled" style="margin: 0.5rem 0;">
+                    <li>Изучена роль веб-сайтов в различных сферах деятельности.</li>
+                    <li>Определены пути обучения веб-разработке.</li>
+                    <li>Освоены принципы работы с платформой Visual Studio Code.</li>
+                    <li>Создан практический веб-сайт с использованием HTML, CSS и JavaScript.</li>
+                </ul>
+                <p>Практическая значимость проекта заключается в том, что разработанный веб-сайт может служить наглядным пособием для изучения основ веб-разработки, шаблоном для создания более сложных проектов и демонстрацией возможностей Visual Studio Code как инструмента профессиональной разработки.</p>
+                <p>В ходе исследования были выявлены следующие преимущества использования Visual Studio Code для разработки веб-сайтов: бесплатное распространение и кроссплатформенность; интуитивно понятный интерфейс, позволяющий быстро освоить базовые функции; широкие возможности кастомизации под индивидуальные потребности разработчика; активное сообщество и регулярные обновления.</p>
+                <p>Таким образом, цель исследовательского проекта — изучить разработку веб-сайтов на платформе Visual Studio Code — достигнута. Результаты работы подтверждают актуальность выбранной темы: в современном цифровом мире навыки веб-разработки становятся востребованными в различных профессиональных сферах, а Visual Studio Code является эффективным инструментом для их освоения и применения.</p>
+            </div>
+        </section>
+        <section style="padding: 2rem 0;">
+            <h2 class="section-title">🌍 Список используемых интернет-ресурсов</h2>
+            <ul class="list-styled" style="columns: 2;">
+                <li>gitverse.ru</li><li>microsoft.com</li><li>timeweb.com</li>
+                <li>code.visualstudio.com</li><li>myseldon.com</li><li>ru.wikipedia.org</li>
+            </ul>
+        </section>
+    </div>
+</main>
+
+<footer class="footer">
+    <img class="footer-bg" src="school32.jpg" alt="Школа">
+    <div class="container">
+        <p>Индивидуальный итоговый проект | Моисеев Виталий, 10Б класс | МОУ «СОШ №32 им. А.С. Пушкина»</p>
+        <p>© 2026 | Энгельсский муниципальный район</p>
+    </div>
+</footer>
+
+</body>
+</html>
