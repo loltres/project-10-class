@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой первый сайт</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const header = document.querySelector('header');
+    const clickButton = document.createElement('button');
+    clickButton.textContent = 'Нажми меня!';
+    clickButton.style.margin = '10px';
+    clickButton.style.padding = '10px 20px';
+    clickButton.style.backgroundColor = '#3498db';
+    clickButton.style.color = 'white';
+    clickButton.style.border = 'none';
+    clickButton.style.borderRadius = '5px';
+    clickButton.style.cursor = 'pointer';
+    header.appendChild(clickButton);
+    
+    clickButton.addEventListener('click', function() {
+        alert('Привет! Это интерактивное сообщение.');
+    });
+
+    const footer = document.querySelector('footer');
+    const dateSpan = document.createElement('span');
+    dateSpan.style.display = 'block';
+    dateSpan.style.marginTop = '10px';
+    const currentDate = new Date();
+    dateSpan.textContent = `Сайт создан: ${currentDate.toLocaleDateString('ru-RU')}`;
+    footer.appendChild(dateSpan);
+
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1)';
+            this.style.transition = 'transform 0.3s';
+        });
+        link.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+    
+    console.log('Сайт успешно загружен!');
+});</script>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать на мой сайт!</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>О нас</h2>
+            <p>Это пример веб-сайта, созданного в Visual Studio Code. Здесь вы можете разместить любую информацию о вашем проекте или компании.</p>
+        </section>
+
+        <section>
+            <h2>Наши преимущества</h2>
+            <ul>
+                <li>Современные технологии</li>
+                <li>Профессиональный подход</li>
+                <li>Индивидуальные решения</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Мой первый сайт</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
